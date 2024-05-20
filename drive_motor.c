@@ -6,6 +6,7 @@
 #include <fcntl.h>
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
+#include <wiringPi.h>
 
 // Define the YB_Pcb_Car struct
 typedef struct {
@@ -123,12 +124,97 @@ void Ctrl_Servo(YB_Pcb_Car* car, int id, int angle) {
     write_array(car, 0x03, data, 2);
 }
 
+
+#define TRACKING_RIGHT1 0 // WiringPi pin 11, BCM_GPIO 17
+#define TRACKING_RIGHT2 7 // WiringPi pin 7, BCM_GPIO 27
+#define TRACKING_LEFT1 2  // WiringPi pin 13, BCM_GPIO 22
+#define TRACKING_LEFT2 3  // WiringPi pin 15, BCM_GPIO 23
+
+void setup() {
+    wiringPiSetup();
+    pinMode(TRACKING_RIGHT1, INPUT);
+    pinMode(TRACKING_RIGHT2, INPUT);
+    pinMode(TRACKING_LEFT1, INPUT);
+    pinMode(TRACKING_LEFT2, INPUT);
+}
+
+void restricting(YB_Pcb_Car* car) {
+    int Left1 = digitalRead(TRACKING_LEFT1);
+    int Left2 = digitalRead(TRACKING_LEFT2);
+    int Right1 = digitalRead(TRACKING_RIGHT1);
+    int Right2 = digitalRead(TRACKING_RIGHT2);
+
+    // 0000
+    if (Left1 == HIGH && Left2 == HIGH && Right1 == HIGH && Right2 == HIGH) {
+        Car_Spin_Right(car, 70, 70);
+        printf("0000\n");
+        delay(100);
+    }
+    // 0001
+    else if (Left1 == HIGH && Left2 == HIGH && Right1 == HIGH && Right2 == LOW) {
+        Car_Spin_Right(car, 50, 50);
+        printf("0001\n");
+        delay(100);
+    }
+    // 0011
+    else if (Left1 == HIGH && Left2 == HIGH && Right1 == LOW && Right2 == LOW) {
+        Car_Spin_Right(car, 70, 70);
+        printf("0011\n");
+        delay(100);
+    }
+    // 0110
+    else if (Left1 == HIGH && Left2 == LOW && Right1 == LOW && Right2 == HIGH) {
+        Car_Run(car, 70, 70);
+        printf("0110\n");
+        delay(100);
+    }
+    // 0111
+    else if (Left1 == HIGH && Left2 == LOW && Right1 == LOW && Right2 == LOW) {
+        Car_Spin_Right(car, 70, 70);
+        printf("0111\n");
+        delay(100);
+    }
+    // 1000
+    else if (Left1 == LOW && Left2 == HIGH && Right1 == HIGH && Right2 == HIGH) {
+        Car_Spin_Left(car, 70, 70);
+        printf("1000\n");
+        delay(100);
+    }
+    // 1100
+    else if (Left1 == LOW && Left2 == LOW && Right1 == HIGH && Right2 == HIGH) {
+        Car_Spin_Left(car, 70, 70);
+        printf("1100\n");
+        delay(100);
+    }
+    // 1110
+    else if (Left1 == LOW && Left2 == LOW && Right1 == LOW && Right2 == HIGH) {
+        Car_Spin_Left(car, 50, 50);
+        printf("1110\n");
+        delay(100);
+    }
+    // 1111
+    else if (Left1 == LOW && Left2 == LOW && Right1 == LOW && Right2 == LOW) {
+        Car_Stop(car);
+        printf("1111\n");
+    }
+}
+
 int main() {
+
     YB_Pcb_Car car;
     car.addr = 0x16;
     if (get_i2c_device(&car, car.addr, 1) < 0) {
         return 1;
     }
-    Car_Run(&car, 100, 100);
+
+    setup();
+
+    /*
+   while (1) {
+        restricting(&car);
+    }*/
+
+    Car_Stop(&car);
+
     return 0;
 }

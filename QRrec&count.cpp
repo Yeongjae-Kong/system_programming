@@ -65,7 +65,7 @@ void qr_code_scanner_thread(const char *server_addr, int server_port) {
 
 int main() {
     const char *server_addr = "127.0.0.1";
-    int server_port = 12345;
+    int server_port = 8080;
 
     std::thread qr_thread(qr_code_scanner_thread, server_addr, server_port);
     qr_thread.join();

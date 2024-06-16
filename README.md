@@ -17,7 +17,7 @@
 
 ## How to run?
 ```
-# in demo_code dir
+# demo_code directory
 ./qrrec &
 ./algorithm &
 ./linetracer &

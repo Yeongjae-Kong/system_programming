@@ -16,6 +16,7 @@
 ## How to run?
 ```
 # demo_code directory
+# do this after opening the server.
 ./qrrec &
 ./algorithm &
 ./linetracer &

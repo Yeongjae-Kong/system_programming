@@ -1,8 +1,6 @@
 # System Programming Team Project - line tracing with qr recognition
 
-## 22조
-
-<!-- PROJECT SHIELDS -->
+## Team name : 22조
 
 ### 201911012 공영재
 ### 202011037 김민재

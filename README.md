@@ -1,4 +1,4 @@
-# System Programming Team Project - line tracing with qr recognition
+# System Programming Team Project - Line tracing with QR recognition
 
 ## Team name : 22조
 

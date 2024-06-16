@@ -1,4 +1,4 @@
-# System Programming Team Project - line tracing with qr recognition, and play a game 
+# System Programming Team Project - line tracing with qr recognition
 
 ## 22조
 

@@ -43,7 +43,7 @@ In the qr_recognition code, the qr value is dynamically written as a text file, 
 - EX) LD_PRELOAD=./noimshow.so ./Client 127.0.0.1 8000
 - Client is the name of our Raspbot executable file
 
-#### ** Winning starategy
+### ** Winning starategy
 
 1. First, get the map from the server, and then find the coordinates of the item closest to the current location with the determine Direction() function through post-processing.
 2. If there are two or more items with the same distance, the score finds the coordinates of the largest value among them.

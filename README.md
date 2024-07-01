@@ -24,7 +24,6 @@ In the qr_recognition code, the qr value is dynamically written as a text file, 
 
 ## How to run?
 ```
-# demo_code directory
 # do this after opening the server.
 ./qrrec &
 ./algorithm &

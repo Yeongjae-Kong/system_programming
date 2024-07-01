@@ -1,7 +1,7 @@
 # System Programming Team Project
 Real-time Line tracing & QR recognition
 
-## Team name : 22조
+### 22조
 
 201911012 공영재 /
 202011037 김민재 /

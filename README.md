@@ -9,7 +9,7 @@ Real-time Line tracing & QR recognition
 202211068 류경찬
 
 ## Rules
-It is a game where you get a high score if you compete with an opponent through Raspbot on a 5 x 5 chessboard and get points with different dynamically generated scores on the map. Items are recognized as QRs, and cars move by tracing black lines on the map. At the same time, each player can install a bomb while playing the game, and they lose points when they touch the bomb.
+It is a game where you get a high score if you compete with an opponent through Raspbot on a 5 x 5 chessboard and get points with different dynamically generated scores on the map. Points are recognized as QRs, and cars move by tracing black lines on the map. At the same time, each player can install a bomb while playing the game, and they lose points when they touch the bomb.
 
 ## Code details
 In the qr_recognition code, the qr value is dynamically written as a text file, received from the algorithm code, transmitted and received to the server, the shortest distance direction is determined, and the information is written in the text file. Map information is received in real time through threading, and data is shared as an output text file between each code. After that, the corresponding direction information is imported from the line tracking code and then driven according to the direction.
